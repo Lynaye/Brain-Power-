@@ -178,4 +178,4 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-export { server }; 
+export { startGame, guess, loseLife };

@@ -1,0 +1,229 @@
+/* Base styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #9a7bcb;
+    position: relative;
+    overflow: hidden;
+}
+
+.start-screen, .container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #C3B1E1;
+    font-family: monospace;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    height: 80%;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.level2-screen, .game-over-screen {
+    text-align: center;
+    background-color: #C3B1E1;
+    font-family: monospace;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    height: 80%;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.start-screen h1 {
+    font-size: 3em;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.start-button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    background-color: #6a4e9f;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.start-button:hover {
+    background-color: #4d3c74;
+}
+
+.container {
+    display: none;
+    gap: 30px;
+}
+
+.life-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.life-icon {
+    width: 50px;
+    height: 50px;
+}
+
+h2 {
+    font-size: 3em;
+    color: white;
+    text-transform: uppercase;
+}
+
+.target-button {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    filter: brightness(0);  /* Initially hide the image */
+    transition: transform 0.5s ease-in-out;
+}
+
+.btn {
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
+    margin: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+}
+
+.btn:hover {
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.9);
+}
+
+@keyframes shake {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(10deg); }
+    50% { transform: scale(1) rotate(-10deg); }
+    75% { transform: scale(1.1) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes enlarge {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.5); }
+}
+
+.target-button.correct {
+    filter: none;  /* Reveal the image */
+    animation: unveil 0.5s ease, shake 0.5s ease-in-out 0.5s, enlarge 0.5s forwards 1s;
+}
+
+/* Animation to unveil the target image */
+@keyframes unveil {
+    0% { filter: brightness(0); }
+    100% { filter: brightness(1); }
+}
+
+.x-overlay {
+    position: absolute;
+    animation: 0.5s ease-in-out, fadeOut 1s forwards;
+    z-index: 9999;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.game-over-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Vertically center */
+    align-items: center; /* Horizontally center */
+    gap: 20px; /* Add space between the text and the button */
+    z-index: 10;
+}
+
+.game-over-screen h2 {
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the elements based on their size */
+}
+
+.game-over-screen button {
+    position: relative;
+    top: 40%;
+}
+
+.game-over-screen h2 {
+    font-size: 3rem;
+    color: white;
+    font-family: monospace;
+}
+
+.game-over-screen button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    background-color: #6a4e9f;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.level2-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Vertically center */
+    align-items: center; /* Horizontally center */
+    gap: 20px; /* Add space between the text and the button */
+    z-index: 10;
+}
+
+.level2-screen h2 {
+    font-size: 3rem;
+    color: white;
+    font-family: monospace;
+}
+
+.level2-screen button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    background-color: #6a4e9f;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}

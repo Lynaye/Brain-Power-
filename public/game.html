@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECES1012 | Brain Power</title>
+    <link rel="stylesheet" type="text/css" href="game.css">
+    <script src="game.js" defer="true"></script> 
+</head>
+<body>
+    <div id="startScreen" class="start-screen">
+        <h1>Brain Power!</h1>
+        <button id="startButton" class="start-button">Start</button>
+    </div>
+
+    <div class="container" style="display: none;">
+        <div class="life-container">
+            <img id="life1" src="img/life.png" class="life-icon" alt="Life 1">
+            <img id="life2" src="img/life.png" class="life-icon" alt="Life 2">
+            <img id="life3" src="img/life.png" class="life-icon" alt="Life 3">
+        </div>
+
+        <h2>Level 1: Guess the Animal!</h2>
+        <div class="game">
+            <div class="toguess">
+                <button class="btn target-button" id="targetButton">
+                </button>
+            </div>
+            <button class="btn" id="0" onclick="guess(0)"></button>
+            <button class="btn" id="1" onclick="guess(1)"></button> 
+            <button class="btn" id="2" onclick="guess(2)"></button> 
+            <button class="btn" id="3" onclick="guess(3)"></button>  
+        </div>
+    </div>
+
+    <div id="gameOverScreen" class="game-over-screen" style="display: none;">
+        <h2>Game Over!</h2>
+        <button onclick="restartGame()">Restart</button>
+    </div>
+
+    <div id="level2Screen" class="level2-screen" style="display: none;">
+        <h2>Level 2!</h2>
+        <button id="nextButton" onclick="nextLevel()">Next</button>
+    </div>
+
+    <audio id="capybara-sound" src="sounds/capybara.mp3" preload="auto"></audio>
+    <audio id="cat-sound" src="sounds/cat.mp3" preload="auto"></audio>
+    <audio id="monkey-sound" src="sounds/monkey.mp3" preload="auto"></audio>
+    <audio id="bunny-sound" src="sounds/bunny.mp3" preload="auto"></audio>
+</body>
+</html>

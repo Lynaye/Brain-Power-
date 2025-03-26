@@ -1,0 +1,46 @@
+Introduction to Computing: A Net-centric Approach
+================ EECS Fall 2024 ================
+======== Lassonde School of Engineering ========
+
+================== Description ==================
+Notes file document for the Term Project. 
+Brain Power! By CompSci Girlies.
+
+
+Members:
+Areta, Ahmed
+ID: 221253208
+Lecture Section: B
+Lab Section: 2
+Email: areta11@my.yorku.ca
+
+Maritta, Gostanian
+ID: 221306394
+Lecture Section: B
+Lab Section: 2
+Email: maritta@my.yorku.ca
+
+Lynda (Hanh), Trinh
+ID: 221589056
+Lecture Section: B
+Lab Section: 2
+Email: hanht@my.yorku.ca
+
+Lynda (Hanh) Trinh: Responsible for Guess the Animal (Level 1)
+Areta Ahmed: Responsible for Guess the Colour (Level 2)
+Maritta Gostanian: Responsible for Sudoku (Level 3)
+
+Important Notes:
+
+1. Ensure you are in the main directory (Game). Ensure that in game.js, last line is commented out. To start the server, open the terminal and type either npm start or node server.js. Then go to http://localhost:8080/
+2. To run the tests, make sure you are in the main directory (Game), in game.js, make sure to uncomment last line, and then type npm run test.
+
+Regarding Phase 1, we were initially supposed to have 4 games. Unfortunately, we had to proceed without the hangman, reducing the total number of games to 3. Additionally, due to conflicts within the group, some functionality had to be removed, such as the ability to replay from whichever game to the very beginning, as scheduling issues arose within the team. To replay, you will have to just go back to first endpoint. For the last game as well, instead of life system she created a unique/different life system using a timer instead to make the game more user-friendly.
+
+@Credits
+For the vitest file, I had help from a friend to initiate a JSDOM and create/simulate the browser running the game in order to test the functionality of the test functions. 
+
+Maritta:
+-I had help with generatePossibleRows function, makeItPuzzle function, and updateRemainingTable function.
+-My friends in 3rd year comp sci helped me.
+-I also did lots of research on w3schools for assistance with the other functions.

@@ -1,0 +1,553 @@
+/**
+Introduction to Computing: A Net-centric Approach
+================ EECS Fall 2024 ================
+======== Lassonde School of Engineering ========
+
+================ Description ================
+ * CSS file document for the Term Project. 
+ * Sudoku Game by Maritta Gostanian. 
+ */
+
+/* General Reset */
+* {
+    box-sizing: border-box; /* ensures padding and borders are included in element's total width and height */
+    margin: 0; /* removes default margins */
+    padding: 0; /* removes defaul padding */
+    font-family: Roboto, sans-serif; /* sets a consisten font family across all elements */
+}
+
+/* Background styling for the entire page */
+html,
+body {
+    background-color: rgb(235, 235, 240); /* sets a light grey background for the page */
+}
+
+/* Styling for the sudoku table */
+table {
+    border: 2px solid #000000; /* black border around the entire table */
+    border-spacing: 0; /* removes spacing between table cells */
+    border-collapse: collapse; /* merges adjacent borders into one */
+    transition: all 0.5s; /* adds smooth transitions for table-related changes */
+}
+
+/* Styling for unordered lists */
+ul {
+    list-style-type: none; /* removes default bullet points */
+}
+
+/* Styling for table cells */
+td {
+    border: 1px solid #000000; /* black border around each cell */
+    text-align: center; /* centers text horizontally */
+    vertical-align: middle; /* centers text vertically */
+}
+
+/* Styling for input elements inside table cells */
+td input {
+    color: #000000; /* black text color */
+    padding: 0; /* removes default padding */
+    border: 0; /* removes default border */
+    text-align: center; /* centers text horizontally */
+    width: 48px; /* fixed width for input fields */
+    height: 48px; /* fixed height for input fields */
+    font-size: 24px; /* large font size for better visibility */
+    background-color: #ffffff; /* white background */
+    outline: none; /* removes focus outline */
+    text-transform: uppercase; /* converts all input to uppercase */
+    transition: all 0.5s; /* smooth transitions for property changes */
+}
+
+/* Styling for disabled input elements */
+input:disabled {
+    background-color: #d1a7f6; /* light purple background to indicate disabled state */
+}
+
+/* Adds thicker bottom border every 3 rows */
+tr:nth-child(3n) {
+    border-bottom: 4px solid #000000;
+}
+
+/* Adds thicker top border every 3 rows starting with the first */
+tr:nth-child(3n + 1) {
+    border-top: 4px solid #000000;
+}
+
+/* Adds thicker right border every 3 columns */
+td:nth-child(3n) {
+    border-right: 4px solid #000000;
+}
+
+/* Adds thicker left border every 3 columns starting with the first */
+td:nth-child(3n + 1) {
+    border-left: 4px solid #000000;
+}
+
+/* Highlights for correct input cells */
+.right-cell {
+    box-shadow: inset 0px 0px 20px 3px rgb(35, 212, 103); /* green glow inside the cell */
+}
+
+/* Highlights for incorrect input cells */
+.wrong-cell {
+    box-shadow: inset 0px 0px 20px 3px rgb(230, 7, 7); /* red glow inside the cell */
+}
+
+/* Highlights for warning cells */
+.warning-cell {
+    box-shadow: inset 0px 0px 20px 3px goldenrod; /* yellow glow inside the cell */
+}
+
+/*Material Design*/  
+/* Styling for the top bar */
+.app-bar {
+    background: #6f0ae3; /* purple background for the app bar */
+    width: 100%; /* full width of the viewport */
+    position: fixed; /* fixes the bar at the top of the screen */
+    height: 64px; /* fixed height for consistency */
+    color: #fff; /* white text color */
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14); /* adds a subtle shadow below the bar for depth */
+    z-index: 5; /* ensures the bar stays above other elements */
+    top: 0; /* positions the bar at the very top of the viewport */
+}
+
+/* Styling for buttons within the bar */
+.bar-button {
+    position: relative; /* allows for precise positioning relative to its normal position */
+    background: transparent; /* transparent background to blend with the bar */
+    border: none; /* removes the default button border */
+    outline: none; /* removes focus outline when clicked */
+    color: #fff; /* white text color */
+    vertical-align: middle; /* aligns the button content vertically */
+    padding: 0 22px; /* adds horizontal spacing for comfortable click area */
+    transition: all 0.5s; /* smooth transition for hover or state changes */
+}
+
+/* Styling for text or icons inside bar buttons */
+.bar-button span {
+    line-height: 64px; /* aligns text vertically with the bar height */
+    display: inline-block; /* allows vertical alignment adjustments */
+    vertical-align: middle; /* centers the span content vertically */
+}
+
+/* Styling for the hamburger menu button */
+.hamburger-button {
+    float: left; /* aligns the button to the left side of the bar */
+    left: 4px; /* adds slight horizontal spacing from the edge */
+}
+
+/* Font styling for text in the bar */
+.bar-font {
+    font-size: 18px; 
+    line-height: 64px; /* aligns text vertically with the bar height */
+}
+
+/* Styling for the title text in the bar */
+.title {
+    position: relative; /* allows for precise positioning relative to its normal flow */
+    float: left; /* aligns the title to the left side of the bar */
+    left: 18px; /* adds spacing between the title and other elements */
+}
+
+/* Styling for the "more" button in the bar */
+.more-button {
+    float: right; /* aligns the button to the right side of the bar */
+}
+
+/* Styling for the entire hamburger menu overlay */
+.hamburger-menu {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed; /* fixes the overlay relative to the viewport */
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 25; /* ensures it appears above other elements but below the menu itself */
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    opacity: 0; /* fully transparent when hidden */
+    transition: 0.1s all; /* smooth transition for visibility changes */
+}
+
+/* Styling for the navigation menu */
+.nav-menu {
+    border-right: 1px solid rgba(0, 0, 0, 0.4); /* subtle border to separate the menu from the overlay */
+    background: #fff;
+    color: #212121;
+    position: fixed; /* fixes the menu relative to the viewport */
+    left: -256px; /* positioned off-screen initially */
+    top: 0;
+    bottom: 0;
+    width: 256px;
+    z-index: 26; /* ensures it appears above the overlay */
+    font-size: 15px;
+    box-shadow: 16px 0 24px 2px rgba(0, 0, 0, 0.14);
+    transition: all 0.3s; /* smooth slide-in/out transition */
+}
+
+/* Styling for the blank space to the right of the navigation menu */
+.nav-menu-blank {
+    position: relative;
+    left: 256px; /* starts immediately after the menu */
+    width: 100%; /* takes up remaining horizontal space */
+    height: 100%;
+}
+
+/* Header section of the navigation menu */
+.nav-head {
+    height: 172px; /* fixed height for consistency */
+    background: #6f0ae3;
+    position: relative;
+}
+
+/* Styling for the profile image in the navigation menu header */
+.nav-head-img {
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    width: 96px;
+    height: 96px;
+    top: 16px;
+    left: 16px; /* aligns image slightly inward from the left */
+    overflow: hidden; /* ensures image stays within the circular shape */
+}
+
+/* Styling for the title in the navigation menu header */
+.nav-head-title {
+    color: #fff;
+    position: absolute;
+    bottom: 10px;
+    margin-left: auto; /* centers the title horizontally */
+    margin-right: auto; /* centers the title horizontally */
+    left: 0px;
+    right: 0;
+    font-size: 22px;
+    display: block;
+    text-align: center;
+}
+
+/* Container for the navigation items */
+.nav-items {
+    margin-top: 12px;
+}
+
+/* Individual navigation items */
+.nav-item {
+    font-weight: 700;
+    display: block; /* each item takes up the full width */
+    color: #333;
+    background: #0000;
+    padding: 15px 0 15px 22px; /* adds vertical padding and left indentation */
+    letter-spacing: 1.1px; /* slightly increased spacing for better readability */
+    outline: none; /* removes focus outline */
+    border: none;
+    width: 100%; /* ensures full width for clickability */
+    text-align: left;
+    margin: 0 !important; /* ensures no extra margin is applied */
+}
+
+/* Main body section of the page */
+.body {
+    width: 95%;
+    max-width: 800px;
+    margin: 96px auto 16px auto; /* centers the body and adds top and bottom margins */
+    display: flex;
+}
+
+/* Card container styling */
+.card {
+    background: #fff;
+    width: fit-content;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14);
+    float: left;
+    padding: 32px 32px 16px 32px;
+}
+
+/* Styling for the status section of the game */
+.status {
+    margin-left: 32px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+/* Game number styling within the status section */
+#game-number {
+    font-size: 12px;
+    color: gray;
+}
+
+/* Styling for the game status list */
+.game-status {
+    margin: 0 0 0 22px;
+    height: 100%;
+}
+
+/* Individual list item in the game status section */
+.game-status li {
+    margin: 18px 0 0 0; /* adds top margin between list items */
+}
+
+/* Vertical alignment container for items in the status section */
+.vertical-adjust {
+    margin: 12px 0;
+}
+
+/* Styling for span elements inside the vertical adjust and footer */
+.vertical-adjust span,
+.footer a {
+    line-height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Option button styling */
+.option-button {
+    display: block;
+    margin: 16px 8px 16px 30px;
+    width: 130px;
+    padding: 8px 10px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    box-shadow: 0 6px 10px 1px rgba(0, 0, 0, 0.14);
+    border-radius: 2px; /* slightly rounded corners */
+    transition: all 0.5s; /* smooth transition for hover/active state */
+    text-align: left;
+}
+
+/* Button container styling for positioning */
+.button {
+    position: relative;
+    overflow: hidden; /* hides any content that overflows the button boundaries */
+    cursor: pointer; /* changes the cursor to a pointer when hovered over */
+}
+
+/* Hover state for the option button */
+.option-button:hover {
+    background: #bf98eb;
+}
+
+/* Active state for the option button */
+.option-button:active {
+    background: #6f0ae3;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.24);
+}
+
+/* Styling for the span inside the option button */
+.option-button span {
+    vertical-align: middle;
+    line-height: 24px;
+}
+
+/* Ripple effect styling for interactive elements */
+.ripple {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%; /* make the ripple effect circular */
+    width: 5px;
+    height: 5px;
+    animation: ripple-effect 1.1s 1 cubic-bezier(0.42, 0, 0.58, 1); /* animate the ripple effect */
+    opacity: 0;
+}
+
+/* Keyframes for the ripple effect animation */
+@keyframes ripple-effect {
+    0% {
+        transform: scale(1); /* start at original size */
+        opacity: 0.4; /* start with partial opacity */
+    }
+    100% {
+        transform: scale(100); /* end with 100 times the original size */
+        opacity: 0; /* fade out the ripple */
+    }
+}
+
+/* Timer display styling */
+.timer {
+    color: #6f0ae3;
+    font-size: 32px;
+    padding: 4px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14);
+    text-align: center;
+}
+
+/* Layout for the table displaying remaining numbers */
+.remain-table {
+    position: relative;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    margin: auto;
+}
+
+/* Styling for each column in the remain table */
+.remain-column {
+    float: left;
+    max-width: 64px;
+}
+
+/* Individual cell styling within the remain table */
+.remain-cell {
+    margin: 10px;
+    text-align: center;
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+/* Padding for the contents inside each cell */
+.remain-cell div {
+    padding: 5px 12px;
+}
+
+/* Header styling for each cell, indicating the number value */
+.remain-cell-header {
+    background-color: #6f0ae3;
+    color: white;
+    font-weight: bold;
+    border-bottom: solid 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for cells that are wrong */
+.red {
+    background: #ff6659;
+    color: #9a0007;
+}
+
+.gray {
+    background: #808080;
+    color: #404040;
+}
+
+/* Floating element container */
+.floating {
+    position: fixed;
+    bottom: 64px;
+    right: 64px;
+    z-index: 20;
+}
+
+/* Floating button styling */
+.floating-btn {
+    position: fixed;
+    bottom: 48px;
+    right: 48px;
+    border-radius: 50%;
+    padding: 12px;
+    border: none;
+    background-color: #6f0ae3;
+    color: #fff;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    outline: none;
+    z-index: 21;
+}
+
+/* Dialog overlay background */
+.dialog {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 50;
+    display: none; /* initially hidden */
+    transition: all 0.2s; /* smooth transition effect when visibility changes */
+}
+
+/* Dialog content styling */
+.dialog-content {
+    top: -200px;
+    background: #fff;
+    width: 90%;
+    max-width: 540px;
+    height: fit-content;
+    margin: auto;
+    vertical-align: middle;
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14);
+    z-index: 51; /* makes sure it is above the background overlay */
+    transition: all 0.5s; /* smooth transition for the content visibility */
+}
+
+/* Dialog header styling */
+.dialog-header {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 16px 32px;
+    border-bottom: solid 1px #808080;
+}
+
+/* Paragraph styling inside the dialog body */
+.dialog-body p {
+    margin: 16px 0 4px 28px;
+    color: gray;
+}
+
+/* Radio option list styling */
+.radio-option {
+    padding: 0 36px;
+    list-style-type: none;
+    position: relative;
+}
+
+/* Radio input styling */
+.radio-option input {
+    outline: none;
+    margin-right: 12px;
+}
+
+/* Label for the radio option */
+.radio-option label {
+    display: block;
+    height: 24px;
+    cursor: pointer;
+    padding: 1.25em 0;
+}
+
+/* Dialog footer styling */
+.dialog-footer {
+    border-top: solid 1px #808080;
+    margin-top: 24px;
+    text-align: right;
+    padding-right: 16px;
+}
+
+/* Button styling in the dialog */
+.dialog-btn {
+    background: transparent;
+    border: none;
+    color: #003c8f;
+    font-size: 16px;
+    margin: 8px 0;
+    padding: 8px 16px;
+    outline: none;
+    min-width: 96px;
+    display: inline-block;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    color: white;
+    background-color: #6f0ae3;
+    margin: 44px 0 0 0;
+    padding: 8px;
+}
+
+/* More options container styling */
+.more-option-div {
+    position: static;
+    display: inline-block;
+    margin-right: 16px;
+}
+
+/* More options list (dropdown) styling */
+.more-option-list {
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0px 8px 10px 1px rgba(0, 0, 0, 0.14);
+    right: 18px;
+    z-index: 25;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1); /* smooth transition when visibility changes */
+}
+

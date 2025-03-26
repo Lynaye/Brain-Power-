@@ -1,3 +1,13 @@
+<!--
+Introduction to Computing: A Net-centric Approach
+================ EECS Fall 2024 ================
+======== Lassonde School of Engineering ========
+
+================= Description =================
+Webpage HTML file document for the Term Project 
+Animal Guessing Game by Lynda Trinh. 
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +20,12 @@
 <body>
     <div id="startScreen" class="start-screen">
         <h1>Brain Power!</h1>
-        <button id="startButton" class="start-button">Start</button>
+        <button id="startButton" class="start-button" onclick="level1()">Start</button>
+    </div>
+
+    <div id="level1Screen" class="level1-screen" style="display: none;">
+        <h2>Level 1!</h2>
+        <button id="nextButton" onclick="startGame()">Next</button>
     </div>
 
     <div class="container" style="display: none;">
@@ -34,7 +49,7 @@
     </div>
 
     <div id="gameOverScreen" class="game-over-screen" style="display: none;">
-        <h2>Game Over!</h2>
+        <h2>You Lose!</h2>
         <button onclick="restartGame()">Restart</button>
     </div>
 

@@ -1,4 +1,13 @@
-/* Base styling */
+/**
+Introduction to Computing: A Net-centric Approach
+================ EECS Fall 2024 ================
+======== Lassonde School of Engineering ========
+
+================ Description ================
+ * CSS file document for the Term Project. 
+ * Animal Guessing Game by Lynda Trinh. 
+ */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +19,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #9a7bcb;
+    background: white;
     position: relative;
     overflow: hidden;
 }
@@ -43,7 +52,7 @@ body {
 }
 
 .start-screen h1 {
-    font-size: 3em;
+    font-size: 10em;
     color: white;
     margin-bottom: 20px;
 }
@@ -97,8 +106,9 @@ h2 {
     border: none;
     position: relative;
     cursor: pointer;
-    filter: brightness(0);  /* Initially hide the image */
+    filter: brightness(0);  
     transition: transform 0.5s ease-in-out;
+    z-index: 10;
 }
 
 .btn {
@@ -133,11 +143,10 @@ h2 {
 }
 
 .target-button.correct {
-    filter: none;  /* Reveal the image */
+    filter: none;  
     animation: unveil 0.5s ease, shake 0.5s ease-in-out 0.5s, enlarge 0.5s forwards 1s;
 }
 
-/* Animation to unveil the target image */
 @keyframes unveil {
     0% { filter: brightness(0); }
     100% { filter: brightness(1); }
@@ -146,7 +155,7 @@ h2 {
 .x-overlay {
     position: absolute;
     animation: 0.5s ease-in-out, fadeOut 1s forwards;
-    z-index: 9999;
+    z-index: 2;
 }
 
 @keyframes fadeOut {
@@ -161,29 +170,26 @@ h2 {
     transform: translate(-50%, -50%);
     text-align: center;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Vertically center */
-    align-items: center; /* Horizontally center */
-    gap: 20px; /* Add space between the text and the button */
-    z-index: 10;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 20px; 
+    z-index: 1;
 }
 
 .game-over-screen h2 {
     position: relative;
     top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the elements based on their size */
+    transform: translate(-50%, -50%); 
+    font-size: 3rem;
+    color: white;
+    font-family: monospace;
 }
 
 .game-over-screen button {
     position: relative;
     top: 40%;
-}
-
-.game-over-screen h2 {
-    font-size: 3rem;
-    color: white;
-    font-family: monospace;
 }
 
 .game-over-screen button {
@@ -204,20 +210,54 @@ h2 {
     transform: translate(-50%, -50%);
     text-align: center;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Vertically center */
-    align-items: center; /* Horizontally center */
-    gap: 20px; /* Add space between the text and the button */
-    z-index: 10;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 20px; 
+    z-index: 1;
 }
 
 .level2-screen h2 {
-    font-size: 3rem;
+    font-size: 10rem;
     color: white;
     font-family: monospace;
 }
 
 .level2-screen button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    background-color: #6a4e9f;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.level1-screen {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #C3B1E1;
+    font-family: monospace;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    height: 80%;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1;  
+}
+
+.level1-screen h2 {
+    font-size: 10rem;
+    color: white;
+    font-family: monospace;
+}
+
+.level1-screen button {
     font-size: 1.5em;
     padding: 10px 20px;
     background-color: #6a4e9f;
